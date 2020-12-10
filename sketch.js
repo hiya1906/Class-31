@@ -1,3 +1,11 @@
+//var array = [1,2,3,4,5];
+// console.log(array[3]);
+// var array2 = [[1,2,3],[4,5,6,7,8]];
+// console.log(array2[1][2]);
+// array.push(235);
+// console.log(array);
+// array.pop(235);
+// console.log(array);
 const Engine = Matter.Engine;
 const World= Matter.World;
 const Bodies = Matter.Bodies;
@@ -7,6 +15,7 @@ var engine, world;
 var box1, pig1,pig3;
 var backgroundImg,platform;
 var bird, slingshot;
+var gameState = "onSling";
 
 
 function preload() {
@@ -68,13 +77,18 @@ function draw(){
     slingshot.display();    
 }
 
-function mouseDragged(){
-    Matter.Body.setPosition(bird.body, {x: mouseX , y: mouseY});
-}
+    function mouseDragged(){
+        if(gameState !== "launch"){
+        Matter.Body.setPosition(bird.body, {x: mouseX , y: mouseY});
+        }
+    }
+
+
 
 
 function mouseReleased(){
     slingshot.fly();
+    gameState = "launch";
 }
 
 function keyPressed(){
